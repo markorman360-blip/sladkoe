@@ -499,24 +499,18 @@
       overflow: hidden;
     }
 
-    .googleLoginBtn:empty::before {
-      content: "Войти через Google";
-      display: inline-flex;
+    .google-button {
+      width: 100%;
       min-height: 48px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       padding: 0 18px;
-      font-weight: 850;
+      border-radius: 12px;
+      background: #fff;
       color: #1f1f1f;
-    }
-
-    .googleLoginBtn:empty::after {
-      content: "G";
-      position: absolute;
-      margin-left: -154px;
-      font-weight: 950;
-      color: #4285f4;
+      font-weight: 850;
     }
 
   </style>
@@ -528,7 +522,7 @@
       <h1>Войди через Google, чтобы открыть подборку</h1>
       <p>Все медиа закрыты. После входа ты получишь доступ к просмотру материалов.</p>
       <div class="google-wrap">
-        <div class="googleLoginBtn" id="googleLoginBtn"></div>
+        <button class="google-button" id="googleButton" type="button">Войти через Google</button>
       </div>
       <p class="tiny">Авторизация выполняется через подключенный скрипт Google-login.</p>
     </div>
@@ -651,7 +645,7 @@
     const back = document.getElementById("back");
     const count = document.getElementById("count");
     const authGate = document.getElementById("authGate");
-    const googleLoginBtn = document.getElementById("googleLoginBtn");
+    const googleButton = document.getElementById("googleButton");
 
     function track(event, payload = {}) {
       const item = { event, payload, at: new Date().toISOString() };
@@ -733,7 +727,7 @@
 
     document.querySelectorAll(".next").forEach(button => button.addEventListener("click", () => show(step + 1)));
     back.addEventListener("click", () => show(step - 1));
-    googleLoginBtn.addEventListener("click", () => {
+    googleButton.addEventListener("click", () => {
       track("google_login_click");
     });
     document.getElementById("partner").addEventListener("click", () => {
